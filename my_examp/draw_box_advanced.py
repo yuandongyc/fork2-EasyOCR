@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import os
 import sys
+import time
 
 def draw_boxes_for_text(target_text="愚园路", color=(0, 255, 0), line_thickness=3):
     print("=" * 60)
@@ -78,10 +79,12 @@ def draw_boxes_for_text(target_text="愚园路", color=(0, 255, 0), line_thickne
                       2)
     
     if found_count > 0:
-        output_path = os.path.join(os.path.dirname(__file__), f'output_{target_text}_box.jpg')
+        timestamp = int(time.time())
+        output_path = os.path.join(os.path.dirname(__file__), f'output_box_{timestamp}.jpg')
         cv2.imwrite(output_path, img)
         print(f"\n✓ 找到 {found_count} 个匹配项")
         print(f"✓ 已保存标记后的图片: {output_path}")
+        print(f"  目标文本: {target_text}")
         print(f"  图片大小: {img.shape}")
         return output_path
     else:
